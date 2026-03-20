@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>EurekaE · Propuesta responsive · Landing Page Autor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    color: #1e1e2a;
+    background: linear-gradient(145deg, #fef9f0 0%, #ffffff 70%);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* === COLORES EUREKA · ATARDECER NARANJA === */
+  :root {
+    --eureka-sunset: #F57F3C;      /* naranja atardecer principal */
+    --eureka-glow: #FFB347;         /* naranja suave / resplandor */
+    --eureka-deep: #C94A1C;         /* naranja profundo acentos */
+    --eureka-soft: #FFE8D4;         /* fondo sutil */
+    --eureka-light: #FFF2E5;        /* fondo muy claro */
+    --eureka-contrast: #1E2B3A;      /* azul petróleo para textos */
+  }
+
+  .page {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 60px);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(2px);
+    border-radius: clamp(24px, 5vw, 48px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(245, 127, 60, 0.1);
+  }
+
+  /* === HEADER 100% RESPONSIVE === */
+  .header {
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, var(--eureka-sunset), var(--eureka-glow)) 1;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    background: linear-gradient(to right, rgba(245,127,60,0.02), transparent);
+    border-radius: 0 0 20px 20px;
+  }
+
+  .header-top {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-top > div:first-child {
+    flex: 2 1 260px;
+  }
+
+  .meta-box {
+    text-align: left;
+    font-size: 13px;
+    color: #3e3e4a;
+    background: var(--eureka-light);
+    padding: 12px 18px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(245,127,60,0.1);
+    line-height: 1.7;
+    border: 1px solid rgba(245,127,60,0.2);
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  .doc-label {
+    font-size: clamp(11px, 3vw, 13px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--eureka-sunset), var(--eureka-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .doc-title {
+    font-size: clamp(24px, 7vw, 38px);
+    font-weight: 700;
+    background: linear-gradient(145deg, #C94A1C, #F57F3C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .doc-sub {
+    font-size: clamp(13px, 4vw, 16px);
+    color: #4a4a5a;
+    margin-top: 4px;
+  }
+
+  /* meta-box responsivo */
+  @media (max-width: 550px) {
+    .header-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .meta-box {
+      margin-left: 0;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  /* section titles */
+  .section-title {
+    font-size: clamp(11px, 3vw, 13px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--eureka-deep);
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(245,127,60,0.2);
+    display: inline-block;
+    background: rgba(255,180,71,0.1);
+    padding-right: 20px;
+    border-radius: 0 0 20px 0;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: #2d2d3a;
+    font-size: clamp(14px, 4vw, 16px);
+    word-wrap: break-word;
+  }
+
+  /* === TABLA 100% ADAPTABLE === */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 12px 0;
+    border-radius: 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 500px;  /* permite scroll en pantallas muy pequeñas, pero sigue siendo usable */
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px -10px rgba(245,127,60,0.2);
+    border: 1px solid rgba(245,127,60,0.15);
+  }
+
+  th {
+    background: linear-gradient(105deg, #F57F3C, #FF9F5C);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(245,127,60,0.1);
+    font-size: 14px;
+    vertical-align: top;
+    background: white;
+  }
+
+  @media (max-width: 580px) {
+    td, th {
+      padding: 10px 10px;
+      font-size: 13px;
+    }
+    td:first-child, th:first-child { padding-left: 12px; }
+    td:last-child, th:last-child { padding-right: 12px; }
+  }
+
+  /* === PRICE BOX FLEXIBLE === */
+  .price-box {
+    background: linear-gradient(115deg, #FFF2E5, #FFE4D0);
+    border-left: 6px solid var(--eureka-sunset);
+    border-radius: 28px;
+    padding: clamp(18px, 4vw, 30px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 20px 30px -12px rgba(245,127,60,0.3);
+  }
+
+  .price-item {
+    text-align: left;
+    flex: 1 1 140px;
+  }
+
+  .price-currency {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--eureka-deep);
+    font-weight: 700;
+  }
+
+  .price-amount {
+    font-size: clamp(24px, 6vw, 38px);
+    font-weight: 800;
+    background: linear-gradient(145deg, #C94A1C, #F57F3C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .price-range {
+    font-size: 13px;
+    color: #6b4f3c;
+  }
+
+  .price-note {
+    flex: 2 1 260px;
+    font-size: 13px;
+    color: #2e2b38;
+    background: rgba(255,255,255,0.7);
+    padding: 16px 18px;
+    border-radius: 24px;
+    border: 1px dashed var(--eureka-sunset);
+  }
+
+  /* === TIMELINE responsive (apila en móvil) === */
+  .timeline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 20px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px -8px rgba(201,74,28,0.25);
+    border: 1px solid rgba(245,127,60,0.3);
+  }
+
+  .phase {
+    flex: 1 1 150px;
+    padding: 16px 12px;
+    background: white;
+    border-right: 1px solid rgba(245,127,60,0.2);
+    border-bottom: 1px solid rgba(245,127,60,0.2);
+  }
+
+  .phase:last-child { border-right: none; }
+
+  @media (max-width: 550px) {
+    .timeline {
+      border-radius: 24px;
+    }
+    .phase {
+      flex: 1 1 100%;
+      border-right: none;
+      border-bottom: 1px solid rgba(245,127,60,0.2);
+    }
+    .phase:last-child { border-bottom: none; }
+  }
+
+  .phase:hover { background: #FFF2E5; }
+  .phase-num {
+    font-size: 11px;
+    color: var(--eureka-sunset);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .phase-name { font-size: 16px; font-weight: 600; margin: 4px 0; }
+  .phase-days { font-size: 13px; color: #c45d2c; }
+
+  /* payment row flex */
+  .payment-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .payment-card {
+    flex: 1 1 180px;
+    background: linear-gradient(135deg, #FFFFFF, #FFFAF5);
+    border: 1.5px solid rgba(245,127,60,0.3);
+    border-radius: 26px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 12px 18px -12px #F57F3C;
+  }
+
+  .payment-pct {
+    font-size: clamp(32px, 8vw, 44px);
+    font-weight: 800;
+    background: linear-gradient(145deg, #C94A1C, #F57F3C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+
+  /* terms */
+  .terms-list {
+    list-style: none;
+    padding: 0;
+  }
+  .terms-list li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    font-size: clamp(13px, 3.8vw, 15px);
+    border-bottom: 1px solid rgba(245,127,60,0.15);
+    word-break: break-word;
+  }
+  .terms-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 4px;
+    color: var(--eureka-sunset);
+    font-size: 18px;
+  }
+
+  /* signature responsive */
+  .signature-block {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: #FFF7EF;
+    padding: clamp(20px, 4vw, 32px);
+    border-radius: 32px;
+    border: 1px solid rgba(245,127,60,0.2);
+  }
+
+  .sig-col {
+    flex: 1 1 200px;
+    border-top: 2px solid var(--eureka-sunset);
+    padding-top: 14px;
+    font-size: 13px;
+    color: #594e45;
+    min-width: 180px;
+  }
+
+  .sig-name {
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 700;
+    color: #1E2B3A;
+    margin-top: 6px;
+    word-break: break-word;
+  }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid transparent;
+    border-image: radial-gradient(circle, #F57F3C, #FFD7B5) 1;
+    font-size: 12px;
+    color: #a57a60;
+    text-align: center;
+  }
+
+  .check {
+    display: inline-block;
+    background: #FFE0CC;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 30px;
+    color: #C94A1C;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* pequeño ajuste para que el check no se deforme */
+  td:last-child {
+    text-align: center;
+  }
+
+  /* mejorar touch en móvil */
+  .phase, .payment-card, button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="doc-label">EurekaE · Propuesta exclusiva</div>
+        <div class="doc-title">Landing Page de Autor</div>
+        <div class="doc-sub">Sitio autogestionable para venta directa de libros</div>
+      </div>
+      <div class="meta-box">
+        <div><strong>Fecha:</strong> 18/03/2026</div>
+        <div><strong>Propuesta N.º:</strong> EU-001</div>
+        <div><strong>Válida hasta:</strong> 30 días</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- intro -->
+  <div class="section">
+    <div class="section-title">✨ visión del proyecto</div>
+    <p style="background: rgba(255,180,71,0.05); padding: 14px 18px; border-radius: 30px;">
+      Propuesta diseñada con los <strong>colores EurekaE (naranja atardecer)</strong>. Landing page profesional para vender tus ebooks sin intermediarios, con pasarela de pago y entrega automática.
+    </p>
+  </div>
+
+  <!-- Entregables (contenedor scroll si es necesario) -->
+  <div class="section">
+    <div class="section-title">🧡 entregables de alto impacto</div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Funcionalidad</th><th>Descripción premium</th><th>Incluido</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Landing page responsiva</strong></td><td>Diseño mobile-first con estética Eureka (naranja atardecer).</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>Vitrina dinámica (hasta 5 libros)</strong></td><td>Portada, sinopsis, precio y botón de compra.</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>Pasarela de pago (Stripe/PayPal)</strong></td><td>El dinero va directo a tu cuenta.</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>Entrega automática del ebook</strong></td><td>Email con PDF tras pago confirmado.</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>Newsletter integrado</strong></td><td>Conexión Mailchimp/Brevo.</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>SEO on-page + analytics</strong></td><td>Metaetiquetas, velocidad optimizada, Google Analytics.</td><td><span class="check">✓</span></td></tr>
+          <tr><td><strong>Soporte post-lanzamiento</strong></td><td>14 días de ajustes menores.</td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Inversión -->
+  <div class="section">
+    <div class="section-title">💰 inversión única</div>
+    <div class="price-box">
+      <div class="price-item">
+        <div class="price-currency">Euro (€)</div>
+        <div class="price-amount">a medida</div>
+        <div class="price-range">pago único</div>
+      </div>
+      <div class="price-item">
+        <div class="price-currency">Real (R$)</div>
+        <div class="price-amount">sob medida</div>
+        <div class="price-range">pagamento único</div>
+      </div>
+      <div class="price-note">
+        <span style="font-weight:600;">Rango orientativo:</span> 500€ – 1500€ (según personalización).<br>
+        <em>Costes externos: hosting ~10€/mes, dominio ~12€/año, comisión Stripe 2,9%+0,30€.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plazos -->
+  <div class="section">
+    <div class="section-title">⏳ cronograma estimado</div>
+    <div class="timeline">
+      <div class="phase"><span class="phase-num">Fase 1 · BRIEFING</span><div class="phase-name">Co-creación</div><div class="phase-days">3-5 días</div></div>
+      <div class="phase"><span class="phase-num">Fase 2 · DISEÑO</span><div class="phase-name">Look & feel</div><div class="phase-days">5-7 días</div></div>
+      <div class="phase"><span class="phase-num">Fase 3 · REVISIONES</span><div class="phase-name">Feedback</div><div class="phase-days">2-3 días</div></div>
+      <div class="phase"><span class="phase-num">Fase 4 · LANZAMIENTO</span><div class="phase-name">Go live!</div><div class="phase-days">1 día</div></div>
+    </div>
+    <p style="margin-top: 18px; background: #FFE8D4; padding: 12px 20px; border-radius: 40px; color:#A15526;">
+      🚀 <strong>Entrega total: 2-3 semanas</strong> desde aprobación y anticipo.
+    </p>
+  </div>
+
+  <!-- Condiciones de pago -->
+  <div class="section">
+    <div class="section-title">💸 condiciones flexibles</div>
+    <div class="payment-row">
+      <div class="payment-card"><div class="payment-pct">50%</div><div class="payment-label">anticipo creativo</div></div>
+      <div class="payment-card"><div class="payment-pct">50%</div><div class="payment-label">contra entrega</div></div>
+    </div>
+  </div>
+
+  <!-- Términos -->
+  <div class="section">
+    <div class="section-title">📋 términos claros</div>
+    <ul class="terms-list">
+      <li>Incluye <strong>2 rondas de revisiones</strong> sobre el diseño inicial.</li>
+      <li>Cliente debe facilitar textos, portadas y PDFs antes de comenzar.</li>
+      <li>Dominio y hosting por cuenta del cliente (te asesoramos sin costo).</li>
+      <li>Propiedad intelectual 100% transferida al recibir el pago final.</li>
+      <li>Válida por 30 días; para asegurar precio y disponibilidad firma antes.</li>
+    </ul>
+  </div>
+
+  <!-- Firma -->
+  <div class="signature-block">
+    <div class="sig-col">
+      <div>Presentado por</div>
+      <div class="sig-name">Frank E. Acosta R.</div>
+      <div>ernestinversion@gmail.com · +55 85 9879-19687</div>
+      <div style="color:#F57F3C;">EurekaE · soluciones que convierten</div>
+    </div>
+    <div class="sig-col">
+      <div>Aceptado por</div>
+      <div class="sig-name">Arlen Lopez Wilson</div>
+      <div>Fecha: ____ / ____ / 2026</div>
+      <div style="color:#C94A1C;">✍️ firma digital válida</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    🌅 EurekaE · cada proyecto tiene su atardecer · confidencial
+  </div>
+
+</div>
+</body>
+</html>
