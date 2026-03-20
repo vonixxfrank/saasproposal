@@ -2,534 +2,1217 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>EurekaE · Propuesta responsive · Landing Page Autor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente IA Vonixx — Propuesta de Proyecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  :root {
+    --black: #0a0a0a;
+    --carbon: #111111;
+    --steel: #1a1a1a;
+    --chrome: #c8c8c8;
+    --white: #f0f0ee;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a6030;
+    --red: #c0392b;
+    --muted: #555;
+    --border: rgba(201,168,76,0.18);
+  }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-size: 15px;
-    color: #1e1e2a;
-    background: linear-gradient(145deg, #fef9f0 0%, #ffffff 70%);
-    line-height: 1.5;
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
     min-height: 100vh;
-    padding: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 80px 6vw 60px;
+    overflow: hidden;
+  }
+
+  .hero-bg-lines {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 119px,
+        rgba(201,168,76,0.04) 120px
+      );
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
     align-items: center;
-  }
-
-  /* === COLORES EUREKA · ATARDECER NARANJA === */
-  :root {
-    --eureka-sunset: #F57F3C;      /* naranja atardecer principal */
-    --eureka-glow: #FFB347;         /* naranja suave / resplandor */
-    --eureka-deep: #C94A1C;         /* naranja profundo acentos */
-    --eureka-soft: #FFE8D4;         /* fondo sutil */
-    --eureka-light: #FFF2E5;        /* fondo muy claro */
-    --eureka-contrast: #1E2B3A;      /* azul petróleo para textos */
-  }
-
-  .page {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: clamp(24px, 6vw, 60px);
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(2px);
-    border-radius: clamp(24px, 5vw, 48px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(245, 127, 60, 0.1);
-  }
-
-  /* === HEADER 100% RESPONSIVE === */
-  .header {
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(to right, var(--eureka-sunset), var(--eureka-glow)) 1;
-    padding-bottom: 20px;
-    margin-bottom: 28px;
-    background: linear-gradient(to right, rgba(245,127,60,0.02), transparent);
-    border-radius: 0 0 20px 20px;
-  }
-
-  .header-top {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header-top > div:first-child {
-    flex: 2 1 260px;
-  }
-
-  .meta-box {
-    text-align: left;
-    font-size: 13px;
-    color: #3e3e4a;
-    background: var(--eureka-light);
-    padding: 12px 18px;
-    border-radius: 40px;
-    box-shadow: 0 4px 8px rgba(245,127,60,0.1);
-    line-height: 1.7;
-    border: 1px solid rgba(245,127,60,0.2);
-    width: fit-content;
-    margin-left: auto;
-  }
-
-  .doc-label {
-    font-size: clamp(11px, 3vw, 13px);
-    letter-spacing: 0.14em;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 6px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
     text-transform: uppercase;
-    background: linear-gradient(135deg, var(--eureka-sunset), var(--eureka-deep));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 36px;
+    width: fit-content;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
-  .doc-title {
-    font-size: clamp(24px, 7vw, 38px);
-    font-weight: 700;
-    background: linear-gradient(145deg, #C94A1C, #F57F3C);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.2;
-    word-break: break-word;
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s ease-in-out infinite;
   }
 
-  .doc-sub {
-    font-size: clamp(13px, 4vw, 16px);
-    color: #4a4a5a;
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 130px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.4s;
+  }
+
+  h1 span {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--chrome);
+    max-width: 520px;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.8s;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--black);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--chrome);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(200,200,200,0.25);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 48px;
+    right: 6vw;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1s;
+  }
+
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
     margin-top: 4px;
   }
 
-  /* meta-box responsivo */
-  @media (max-width: 550px) {
-    .header-top {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .meta-box {
-      margin-left: 0;
-      width: 100%;
-      text-align: left;
-    }
+  /* ─── SCROLL LINE ─── */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 6vw;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 1.2s;
   }
 
-  /* section titles */
-  .section-title {
-    font-size: clamp(11px, 3vw, 13px);
-    letter-spacing: 0.1em;
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    padding: 100px 6vw;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
     text-transform: uppercase;
-    color: var(--eureka-deep);
-    font-weight: 700;
-    margin-bottom: 14px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(245,127,60,0.2);
-    display: inline-block;
-    background: rgba(255,180,71,0.1);
-    padding-right: 20px;
-    border-radius: 0 0 20px 0;
-  }
-
-  p {
     margin-bottom: 16px;
-    color: #2d2d3a;
-    font-size: clamp(14px, 4vw, 16px);
-    word-wrap: break-word;
   }
 
-  /* === TABLA 100% ADAPTABLE === */
-  .table-wrapper {
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  h2 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .section-intro {
+    font-size: 16px;
+    color: var(--chrome);
+    max-width: 580px;
+    margin-bottom: 60px;
+    line-height: 1.7;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
     width: 100%;
-    overflow-x: auto;
-    margin: 12px 0;
-    border-radius: 24px;
-    -webkit-overflow-scrolling: touch;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-dim) 0%, transparent 80%);
+    margin: 0 0 0 0;
   }
 
-  table {
-    width: 100%;
-    min-width: 500px;  /* permite scroll en pantallas muy pequeñas, pero sigue siendo usable */
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px -10px rgba(245,127,60,0.2);
-    border: 1px solid rgba(245,127,60,0.15);
+  /* ─── PROBLEMA ─── */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 0;
   }
 
-  th {
-    background: linear-gradient(105deg, #F57F3C, #FF9F5C);
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 12px 14px;
-    text-align: left;
-    white-space: nowrap;
+  .problem-card {
+    background: var(--steel);
+    padding: 36px 32px;
+    border-left: 3px solid var(--red);
+    transition: border-color 0.2s;
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  td {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(245,127,60,0.1);
+  .problem-card.visible {
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .problem-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .problem-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .problem-card p {
     font-size: 14px;
-    vertical-align: top;
-    background: white;
+    color: var(--chrome);
+    line-height: 1.6;
   }
 
-  @media (max-width: 580px) {
-    td, th {
-      padding: 10px 10px;
-      font-size: 13px;
-    }
-    td:first-child, th:first-child { padding-left: 12px; }
-    td:last-child, th:last-child { padding-right: 12px; }
+  /* ─── SOLUCIÓN ─── */
+  .solution-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
   }
 
-  /* === PRICE BOX FLEXIBLE === */
-  .price-box {
-    background: linear-gradient(115deg, #FFF2E5, #FFE4D0);
-    border-left: 6px solid var(--eureka-sunset);
-    border-radius: 28px;
-    padding: clamp(18px, 4vw, 30px);
+  @media (max-width: 768px) {
+    .solution-layout { grid-template-columns: 1fr; }
+  }
+
+  .solution-features {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .feature-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--steel);
+    border: 1px solid var(--border);
+    transition: border-color 0.25s, transform 0.2s;
+    cursor: default;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .feature-row.visible { animation: fadeRight 0.5s ease forwards; }
+  .feature-row:hover { border-color: var(--gold); transform: translateX(4px); }
+
+  .feature-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--gold-dim);
+    line-height: 1;
+    min-width: 36px;
+    transition: color 0.2s;
+  }
+
+  .feature-row:hover .feature-num { color: var(--gold); }
+
+  .feature-text h3 {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  .feature-text p {
+    font-size: 13px;
+    color: var(--chrome);
+    line-height: 1.6;
+  }
+
+  .solution-visual {
+    position: sticky;
+    top: 100px;
+  }
+
+  .phone-mockup {
+    background: var(--carbon);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 24px 20px;
+    max-width: 320px;
+    margin: 0 auto;
+    box-shadow: 0 0 60px rgba(201,168,76,0.06);
+  }
+
+  .phone-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 20px;
+  }
+
+  .phone-avatar {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--black);
+  }
+
+  .phone-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .phone-status {
+    font-size: 11px;
+    color: #4caf50;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .msg.user {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--white);
+    align-self: flex-end;
+    border-radius: 12px 12px 2px 12px;
+  }
+
+  .msg.bot {
+    background: var(--steel);
+    color: var(--chrome);
+    align-self: flex-start;
+    border-radius: 12px 12px 12px 2px;
+  }
+
+  .msg.bot strong { color: var(--gold); font-weight: 500; }
+
+  .typing {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: var(--steel);
+    border-radius: 12px 12px 12px 2px;
+    width: fit-content;
+    align-self: flex-start;
+  }
+
+  .typing span {
+    width: 6px; height: 6px;
+    background: var(--muted);
+    border-radius: 50%;
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes typingBounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* ─── ETAPAS / ROADMAP ─── */
+  .roadmap {
+    background: var(--carbon);
+  }
+
+  .stages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .stage.visible { animation: fadeUp 0.5s ease forwards; }
+
+  .stage:last-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .stage-left {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .stage-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--steel);
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .stage:hover .stage-num { color: var(--gold-dim); }
+
+  .stage-weeks {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  .stage-right {
+    padding: 40px 0 40px 40px;
+  }
+
+  .stage-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .stage-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .steps-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--steel);
+    border-left: 2px solid var(--border);
+    font-size: 13px;
+    color: var(--chrome);
+    line-height: 1.45;
+    transition: border-color 0.2s;
+  }
+
+  .step-item:hover { border-color: var(--gold); }
+
+  .step-dot {
+    width: 5px; height: 5px;
+    min-width: 5px;
+    background: var(--gold-dim);
+    border-radius: 50%;
+    margin-top: 6px;
+    transition: background 0.2s;
+  }
+
+  .step-item:hover .step-dot { background: var(--gold); }
+
+  .stage-deliverable {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .stage-deliverable::before {
+    content: '✓';
+    font-size: 12px;
+  }
+
+  /* ─── INVERSIÓN ─── */
+  .investment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .investment-grid { grid-template-columns: 1fr; }
+  }
+
+  .inv-card {
+    background: var(--steel);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .inv-card.visible { animation: fadeUp 0.6s ease forwards; }
+
+  .inv-card.featured {
+    background: var(--gold);
+    grid-column: 1 / -1;
+  }
+
+  .inv-card.featured * { color: var(--black) !important; }
+
+  .inv-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    border-left: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+
+  .inv-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .inv-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .inv-note {
+    font-size: 13px;
+    color: var(--chrome);
+    line-height: 1.6;
+  }
+
+  /* ─── RESULTADO FINAL ─── */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .outcome-card {
+    background: var(--steel);
+    padding: 36px 28px;
+    border-top: 2px solid var(--gold);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .outcome-card.visible { animation: fadeUp 0.5s ease forwards; }
+
+  .outcome-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .outcome-card h3 {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .outcome-card p {
+    font-size: 13px;
+    color: var(--chrome);
+    line-height: 1.6;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 60px 6vw;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 20px 30px -12px rgba(245,127,60,0.3);
+    padding: 20px 6vw;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
   }
 
-  .price-item {
-    text-align: left;
-    flex: 1 1 140px;
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-decoration: none;
   }
 
-  .price-currency {
-    font-size: 12px;
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--eureka-deep);
-    font-weight: 700;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .price-amount {
-    font-size: clamp(24px, 6vw, 38px);
-    font-weight: 800;
-    background: linear-gradient(145deg, #C94A1C, #F57F3C);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.2;
-    word-break: break-word;
+  .nav-links a:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-stats { position: relative; bottom: auto; right: auto; margin-top: 48px; justify-content: flex-start; }
+    .stage { grid-template-columns: 1fr; }
+    .stage-left { border-right: none; border-bottom: 1px solid var(--border); align-items: flex-start; flex-direction: row; padding: 20px 0; }
+    .stage-right { padding: 24px 0; }
   }
 
-  .price-range {
-    font-size: 13px;
-    color: #6b4f3c;
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .price-note {
-    flex: 2 1 260px;
-    font-size: 13px;
-    color: #2e2b38;
-    background: rgba(255,255,255,0.7);
-    padding: 16px 18px;
-    border-radius: 24px;
-    border: 1px dashed var(--eureka-sunset);
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
-  /* === TIMELINE responsive (apila en móvil) === */
-  .timeline {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0;
-    margin-top: 20px;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 8px 16px -8px rgba(201,74,28,0.25);
-    border: 1px solid rgba(245,127,60,0.3);
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  .phase {
-    flex: 1 1 150px;
-    padding: 16px 12px;
-    background: white;
-    border-right: 1px solid rgba(245,127,60,0.2);
-    border-bottom: 1px solid rgba(245,127,60,0.2);
-  }
-
-  .phase:last-child { border-right: none; }
-
-  @media (max-width: 550px) {
-    .timeline {
-      border-radius: 24px;
-    }
-    .phase {
-      flex: 1 1 100%;
-      border-right: none;
-      border-bottom: 1px solid rgba(245,127,60,0.2);
-    }
-    .phase:last-child { border-bottom: none; }
-  }
-
-  .phase:hover { background: #FFF2E5; }
-  .phase-num {
-    font-size: 11px;
-    color: var(--eureka-sunset);
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .phase-name { font-size: 16px; font-weight: 600; margin: 4px 0; }
-  .phase-days { font-size: 13px; color: #c45d2c; }
-
-  /* payment row flex */
-  .payment-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 16px;
-  }
-
-  .payment-card {
-    flex: 1 1 180px;
-    background: linear-gradient(135deg, #FFFFFF, #FFFAF5);
-    border: 1.5px solid rgba(245,127,60,0.3);
-    border-radius: 26px;
-    padding: 20px 16px;
-    text-align: center;
-    box-shadow: 0 12px 18px -12px #F57F3C;
-  }
-
-  .payment-pct {
-    font-size: clamp(32px, 8vw, 44px);
-    font-weight: 800;
-    background: linear-gradient(145deg, #C94A1C, #F57F3C);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1;
-  }
-
-  /* terms */
-  .terms-list {
-    list-style: none;
-    padding: 0;
-  }
-  .terms-list li {
-    padding: 12px 0 12px 28px;
-    position: relative;
-    font-size: clamp(13px, 3.8vw, 15px);
-    border-bottom: 1px solid rgba(245,127,60,0.15);
-    word-break: break-word;
-  }
-  .terms-list li::before {
-    content: "✦";
-    position: absolute;
-    left: 4px;
-    color: var(--eureka-sunset);
-    font-size: 18px;
-  }
-
-  /* signature responsive */
-  .signature-block {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-    background: #FFF7EF;
-    padding: clamp(20px, 4vw, 32px);
-    border-radius: 32px;
-    border: 1px solid rgba(245,127,60,0.2);
-  }
-
-  .sig-col {
-    flex: 1 1 200px;
-    border-top: 2px solid var(--eureka-sunset);
-    padding-top: 14px;
-    font-size: 13px;
-    color: #594e45;
-    min-width: 180px;
-  }
-
-  .sig-name {
-    font-size: clamp(16px, 4vw, 20px);
-    font-weight: 700;
-    color: #1E2B3A;
-    margin-top: 6px;
-    word-break: break-word;
-  }
-
-  .footer {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 2px solid transparent;
-    border-image: radial-gradient(circle, #F57F3C, #FFD7B5) 1;
-    font-size: 12px;
-    color: #a57a60;
-    text-align: center;
-  }
-
-  .check {
-    display: inline-block;
-    background: #FFE0CC;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    text-align: center;
-    border-radius: 30px;
-    color: #C94A1C;
-    font-size: 16px;
-    font-weight: 700;
-  }
-
-  /* pequeño ajuste para que el check no se deforme */
-  td:last-child {
-    text-align: center;
-  }
-
-  /* mejorar touch en móvil */
-  .phase, .payment-card, button {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--gold);
+    z-index: 200;
+    transition: width 0.1s;
   }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-top">
-      <div>
-        <div class="doc-label">EurekaE · Propuesta exclusiva</div>
-        <div class="doc-title">Landing Page de Autor</div>
-        <div class="doc-sub">Sitio autogestionable para venta directa de libros</div>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <a class="nav-brand" href="#">VONIXX AI</a>
+  <ul class="nav-links">
+    <li><a href="#problema">Problema</a></li>
+    <li><a href="#solucion">Solución</a></li>
+    <li><a href="#etapas">Etapas</a></li>
+    <li><a href="#inversion">Inversión</a></li>
+    <li><a href="#resultado">Resultados</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="scroll-indicator"></div>
+
+  <div class="badge">Propuesta de proyecto · 2025</div>
+
+  <h1>
+    Asistente
+    <span>Inteligente</span>
+    Vonixx
+  </h1>
+
+  <p class="hero-sub">
+    Un sistema automatizado que atiende clientes, agenda citas, cobra servicios y hace seguimiento — todo desde WhatsApp, sin que tu equipo tenga que intervenir en cada paso.
+  </p>
+
+  <div class="hero-cta">
+    <a href="#etapas" class="btn-gold">Ver el plan completo</a>
+    <a href="#inversion" class="btn-outline">Ver inversión</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Disponibilidad</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4 sem</div>
+      <div class="stat-label">Tiempo estimado</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Automatizado</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEMA ─── -->
+<section id="problema">
+  <div class="section-label">01 — El problema actual</div>
+  <h2>Lo que pasa hoy <em>sin</em> el asistente</h2>
+  <p class="section-intro">Cada mensaje sin responder es un cliente que se va con la competencia. Vonixx merece un sistema que nunca descansa.</p>
+
+  <div class="problems-grid">
+    <div class="problem-card">
+      <span class="problem-icon">💬</span>
+      <h3>Mensajes sin responder</h3>
+      <p>Los clientes escriben de noche, los fines de semana, en horas pico. Sin un asistente, muchos se quedan esperando y buscan otra opción.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">📅</span>
+      <h3>Agendamiento manual</h3>
+      <p>Coordinar citas por WhatsApp uno a uno consume horas del equipo que podrían dedicarse al trabajo real: los autos.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">💸</span>
+      <h3>Cobros sin seguimiento</h3>
+      <p>Sin confirmación de pago automática, hay clientes que reservan y no pagan, o pagos que nunca se verifican a tiempo.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">🔁</span>
+      <h3>Clientes que no regresan</h3>
+      <p>Sin recordatorios ni seguimiento post-servicio, los clientes simplemente olvidan volver. El negocio pierde recurrencia sin darse cuenta.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── SOLUCIÓN ─── -->
+<section id="solucion">
+  <div class="section-label">02 — La solución</div>
+  <h2>Qué hace <em>el asistente</em></h2>
+  <p class="section-intro">Un asistente que habla, entiende y actúa — como un empleado disponible las 24 horas, pero sin sueldo mensual.</p>
+
+  <div class="solution-layout">
+    <div class="solution-features">
+      <div class="feature-row">
+        <div class="feature-num">01</div>
+        <div class="feature-text">
+          <h3>Responde automáticamente por WhatsApp</h3>
+          <p>Saluda, presenta servicios, responde preguntas frecuentes y guía al cliente hacia una cita — sin que nadie del equipo tenga que intervenir.</p>
+        </div>
       </div>
-      <div class="meta-box">
-        <div><strong>Fecha:</strong> 18/03/2026</div>
-        <div><strong>Propuesta N.º:</strong> EU-001</div>
-        <div><strong>Válida hasta:</strong> 30 días</div>
+      <div class="feature-row">
+        <div class="feature-num">02</div>
+        <div class="feature-text">
+          <h3>Agenda citas directo en Google Calendar</h3>
+          <p>El cliente elige fecha y hora disponible. El sistema confirma, reserva y envía recordatorio automático el día anterior.</p>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="feature-num">03</div>
+        <div class="feature-text">
+          <h3>Genera y verifica cobros PIX</h3>
+          <p>Envía el link de pago, espera la confirmación bancaria y avisa al equipo solo cuando el dinero ya está en la cuenta.</p>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="feature-num">04</div>
+        <div class="feature-text">
+          <h3>Hace seguimiento post-servicio</h3>
+          <p>Días después del servicio, el asistente contacta al cliente, pregunta cómo quedó el auto y ofrece el próximo agendamiento.</p>
+        </div>
+      </div>
+      <div class="feature-row">
+        <div class="feature-num">05</div>
+        <div class="feature-text">
+          <h3>Escala al equipo humano cuando es necesario</h3>
+          <p>Si el cliente tiene una queja o situación especial, el asistente identifica el momento y transfiere la conversación a una persona real.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="solution-visual">
+      <div class="phone-mockup">
+        <div class="phone-header">
+          <div class="phone-avatar">V</div>
+          <div>
+            <div class="phone-name">Vonixx Asistente</div>
+            <div class="phone-status">● En línea ahora</div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatDemo">
+          <div class="msg user">Hola! Quiero agendar un detailing completo</div>
+          <div class="msg bot">¡Bienvenido a <strong>Vonixx</strong>! 🚗✨ Con gusto te ayudo. ¿Para qué tipo de vehículo sería el servicio?</div>
+          <div class="msg user">Para una SUV, quiero el paquete premium</div>
+          <div class="msg bot">Perfecto. El <strong>Paquete Premium SUV</strong> incluye lavado profundo, descontaminación, coating y aspirado completo. Tengo disponibilidad este <strong>sábado 14h</strong> o <strong>lunes 10h</strong>. ¿Cuál te queda mejor?</div>
+          <div class="msg user">El sábado perfecto</div>
+          <div class="msg bot">¡Reservado! 🎯 Te envío el link de pago para confirmar tu cita del <strong>sábado a las 14h</strong>. Una vez confirmado, recibirás un recordatorio el día anterior.</div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- intro -->
-  <div class="section">
-    <div class="section-title">✨ visión del proyecto</div>
-    <p style="background: rgba(255,180,71,0.05); padding: 14px 18px; border-radius: 30px;">
-      Propuesta diseñada con los <strong>colores EurekaE (naranja atardecer)</strong>. Landing page profesional para vender tus ebooks sin intermediarios, con pasarela de pago y entrega automática.
-    </p>
-  </div>
+<div class="divider"></div>
 
-  <!-- Entregables (contenedor scroll si es necesario) -->
-  <div class="section">
-    <div class="section-title">🧡 entregables de alto impacto</div>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr><th>Funcionalidad</th><th>Descripción premium</th><th>Incluido</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>Landing page responsiva</strong></td><td>Diseño mobile-first con estética Eureka (naranja atardecer).</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>Vitrina dinámica (hasta 5 libros)</strong></td><td>Portada, sinopsis, precio y botón de compra.</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>Pasarela de pago (Stripe/PayPal)</strong></td><td>El dinero va directo a tu cuenta.</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>Entrega automática del ebook</strong></td><td>Email con PDF tras pago confirmado.</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>Newsletter integrado</strong></td><td>Conexión Mailchimp/Brevo.</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>SEO on-page + analytics</strong></td><td>Metaetiquetas, velocidad optimizada, Google Analytics.</td><td><span class="check">✓</span></td></tr>
-          <tr><td><strong>Soporte post-lanzamiento</strong></td><td>14 días de ajustes menores.</td><td><span class="check">✓</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<!-- ─── ETAPAS ─── -->
+<section id="etapas" class="roadmap">
+  <div class="section-label">03 — El plan de trabajo</div>
+  <h2>Cómo lo <em>construimos</em></h2>
+  <p class="section-intro">El proyecto se divide en 5 etapas progresivas. Cada etapa entrega algo funcional que ya puede usarse mientras construimos la siguiente.</p>
 
-  <!-- Inversión -->
-  <div class="section">
-    <div class="section-title">💰 inversión única</div>
-    <div class="price-box">
-      <div class="price-item">
-        <div class="price-currency">Euro (€)</div>
-        <div class="price-amount">a medida</div>
-        <div class="price-range">pago único</div>
+  <div class="stages-container">
+
+    <!-- ETAPA 1 -->
+    <div class="stage">
+      <div class="stage-left">
+        <div class="stage-num">01</div>
+        <div class="stage-weeks">Semana 1</div>
       </div>
-      <div class="price-item">
-        <div class="price-currency">Real (R$)</div>
-        <div class="price-amount">sob medida</div>
-        <div class="price-range">pagamento único</div>
-      </div>
-      <div class="price-note">
-        <span style="font-weight:600;">Rango orientativo:</span> 500€ – 1500€ (según personalización).<br>
-        <em>Costes externos: hosting ~10€/mes, dominio ~12€/año, comisión Stripe 2,9%+0,30€.</em>
+      <div class="stage-right">
+        <div class="stage-title">Infraestructura y conexión WhatsApp</div>
+        <div class="stage-desc">El andamiaje invisible que hace funcionar todo lo demás</div>
+        <div class="steps-list">
+          <div class="step-item"><div class="step-dot"></div>Configurar el servidor donde vivirá el sistema (VPS)</div>
+          <div class="step-item"><div class="step-dot"></div>Instalar N8N: el cerebro que conecta todas las piezas</div>
+          <div class="step-item"><div class="step-dot"></div>Instalar Chatwoot: la bandeja de entrada unificada del equipo</div>
+          <div class="step-item"><div class="step-dot"></div>Conectar el número de WhatsApp de Vonixx al sistema</div>
+          <div class="step-item"><div class="step-dot"></div>Crear etiquetas: nuevo cliente, agendado, pagó, VIP, etc.</div>
+          <div class="step-item"><div class="step-dot"></div>Prueba completa: un mensaje entra y el equipo lo ve en pantalla</div>
+        </div>
+        <div class="stage-deliverable">WhatsApp conectado y equipo recibiendo mensajes en una sola pantalla</div>
       </div>
     </div>
-  </div>
 
-  <!-- Plazos -->
-  <div class="section">
-    <div class="section-title">⏳ cronograma estimado</div>
-    <div class="timeline">
-      <div class="phase"><span class="phase-num">Fase 1 · BRIEFING</span><div class="phase-name">Co-creación</div><div class="phase-days">3-5 días</div></div>
-      <div class="phase"><span class="phase-num">Fase 2 · DISEÑO</span><div class="phase-name">Look & feel</div><div class="phase-days">5-7 días</div></div>
-      <div class="phase"><span class="phase-num">Fase 3 · REVISIONES</span><div class="phase-name">Feedback</div><div class="phase-days">2-3 días</div></div>
-      <div class="phase"><span class="phase-num">Fase 4 · LANZAMIENTO</span><div class="phase-name">Go live!</div><div class="phase-days">1 día</div></div>
+    <!-- ETAPA 2 -->
+    <div class="stage">
+      <div class="stage-left">
+        <div class="stage-num">02</div>
+        <div class="stage-weeks">Semana 1–2</div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-title">Asistente de IA + Agendamiento</div>
+        <div class="stage-desc">El asistente empieza a hablar, entender y reservar citas</div>
+        <div class="steps-list">
+          <div class="step-item"><div class="step-dot"></div>Configurar la IA con el catálogo de servicios de Vonixx</div>
+          <div class="step-item"><div class="step-dot"></div>Entrenar el asistente con el tono y lenguaje de la marca</div>
+          <div class="step-item"><div class="step-dot"></div>Conectar Google Calendar para consultar disponibilidad real</div>
+          <div class="step-item"><div class="step-dot"></div>Flujo completo: pregunta → servicio → fecha → confirmación</div>
+          <div class="step-item"><div class="step-dot"></div>Configurar traspaso automático a agente humano cuando se requiera</div>
+          <div class="step-item"><div class="step-dot"></div>Pruebas reales con conversaciones simuladas de clientes</div>
+        </div>
+        <div class="stage-deliverable">El asistente agenda citas por WhatsApp sin intervención humana</div>
+      </div>
     </div>
-    <p style="margin-top: 18px; background: #FFE8D4; padding: 12px 20px; border-radius: 40px; color:#A15526;">
-      🚀 <strong>Entrega total: 2-3 semanas</strong> desde aprobación y anticipo.
-    </p>
-  </div>
 
-  <!-- Condiciones de pago -->
-  <div class="section">
-    <div class="section-title">💸 condiciones flexibles</div>
-    <div class="payment-row">
-      <div class="payment-card"><div class="payment-pct">50%</div><div class="payment-label">anticipo creativo</div></div>
-      <div class="payment-card"><div class="payment-pct">50%</div><div class="payment-label">contra entrega</div></div>
+    <!-- ETAPA 3 -->
+    <div class="stage">
+      <div class="stage-left">
+        <div class="stage-num">03</div>
+        <div class="stage-weeks">Semana 2</div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-title">Recordatorios y seguimiento automático</div>
+        <div class="stage-desc">El sistema que nunca olvida contactar a los clientes</div>
+        <div class="steps-list">
+          <div class="step-item"><div class="step-dot"></div>Recordatorio automático 24h antes de cada cita</div>
+          <div class="step-item"><div class="step-dot"></div>Mensaje de confirmación el mismo día del servicio</div>
+          <div class="step-item"><div class="step-dot"></div>Follow-up 3 días después: ¿quedó satisfecho con el resultado?</div>
+          <div class="step-item"><div class="step-dot"></div>Oferta de reagendamiento para clientes frecuentes</div>
+          <div class="step-item"><div class="step-dot"></div>Panel interno para que el equipo vea el estado de cada cliente</div>
+          <div class="step-item"><div class="step-dot"></div>Alertas internas cuando un cliente no confirma su cita</div>
+        </div>
+        <div class="stage-deliverable">Cero citas olvidadas, cero clientes sin seguimiento</div>
+      </div>
+    </div>
+
+    <!-- ETAPA 4 -->
+    <div class="stage">
+      <div class="stage-left">
+        <div class="stage-num">04</div>
+        <div class="stage-weeks">Semana 3</div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-title">Cobros automáticos con PIX</div>
+        <div class="stage-desc">El dinero llega antes de que el auto entre al taller</div>
+        <div class="steps-list">
+          <div class="step-item"><div class="step-dot"></div>Integrar plataforma de pagos Asaas con el asistente</div>
+          <div class="step-item"><div class="step-dot"></div>El asistente genera y envía link de pago PIX automáticamente</div>
+          <div class="step-item"><div class="step-dot"></div>Verificación bancaria en tiempo real: el sistema confirma el pago</div>
+          <div class="step-item"><div class="step-dot"></div>El cliente recibe confirmación de cita solo tras pagar</div>
+          <div class="step-item"><div class="step-dot"></div>Alerta inmediata al equipo cuando un pago es confirmado</div>
+          <div class="step-item"><div class="step-dot"></div>Registro automático de pagos en base de datos del negocio</div>
+        </div>
+        <div class="stage-deliverable">Cobros verificados antes del servicio, sin perseguir pagos manualmente</div>
+      </div>
+    </div>
+
+    <!-- ETAPA 5 -->
+    <div class="stage">
+      <div class="stage-left">
+        <div class="stage-num">05</div>
+        <div class="stage-weeks">Semana 3–4</div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-title">Llamadas de voz + API oficial WhatsApp</div>
+        <div class="stage-desc">El nivel profesional: llamadas automáticas y máxima estabilidad</div>
+        <div class="steps-list">
+          <div class="step-item"><div class="step-dot"></div>Configurar voz con IA (ElevenLabs) para llamadas automáticas</div>
+          <div class="step-item"><div class="step-dot"></div>Llamada de confirmación automática antes de citas importantes</div>
+          <div class="step-item"><div class="step-dot"></div>Llamada de seguimiento para clientes de alto valor</div>
+          <div class="step-item"><div class="step-dot"></div>Migrar a API Oficial de WhatsApp (Twilio/Meta) para mayor estabilidad</div>
+          <div class="step-item"><div class="step-dot"></div>Eliminar riesgo de bloqueo de número por uso intensivo</div>
+          <div class="step-item"><div class="step-dot"></div>Pruebas de carga y ajuste fino del sistema completo</div>
+        </div>
+        <div class="stage-deliverable">Sistema 100% estable, con voz y listo para escalar</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── INVERSIÓN ─── -->
+<section id="inversion">
+  <div class="section-label">04 — La inversión</div>
+  <h2>Cuánto <em>cuesta</em></h2>
+  <p class="section-intro">Una inversión única de desarrollo más un costo operativo mensual bajo. Sin sorpresas.</p>
+
+  <div class="investment-grid">
+    <div class="inv-card featured">
+      <div class="inv-label">Inversión única de desarrollo</div>
+      <div class="inv-amount" style="color: var(--black) !important;">USD $2,500 – $4,500</div>
+      <div class="inv-note">Incluye todas las etapas de configuración, integración, pruebas y entrega del sistema completo. Precio varía según personalización y módulos incluidos.</div>
+    </div>
+    <div class="inv-card">
+      <div class="inv-label">Infraestructura mensual</div>
+      <div class="inv-amount">USD $60 – $120</div>
+      <div class="inv-note">Servidor VPS + herramientas. Equivale a menos de lo que cuesta un empleado por hora. Vonixx tiene control total de sus datos.</div>
+    </div>
+    <div class="inv-card">
+      <div class="inv-label">Retorno estimado</div>
+      <div class="inv-amount">3 – 6 meses</div>
+      <div class="inv-note">Al recuperar clientes perdidos, reducir tiempo administrativo y aumentar la tasa de citas confirmadas, el sistema se paga solo en menos de un semestre.</div>
     </div>
   </div>
+</section>
 
-  <!-- Términos -->
-  <div class="section">
-    <div class="section-title">📋 términos claros</div>
-    <ul class="terms-list">
-      <li>Incluye <strong>2 rondas de revisiones</strong> sobre el diseño inicial.</li>
-      <li>Cliente debe facilitar textos, portadas y PDFs antes de comenzar.</li>
-      <li>Dominio y hosting por cuenta del cliente (te asesoramos sin costo).</li>
-      <li>Propiedad intelectual 100% transferida al recibir el pago final.</li>
-      <li>Válida por 30 días; para asegurar precio y disponibilidad firma antes.</li>
-    </ul>
-  </div>
+<div class="divider"></div>
 
-  <!-- Firma -->
-  <div class="signature-block">
-    <div class="sig-col">
-      <div>Presentado por</div>
-      <div class="sig-name">Frank E. Acosta R.</div>
-      <div>ernestinversion@gmail.com · +55 85 9879-19687</div>
-      <div style="color:#F57F3C;">EurekaE · soluciones que convierten</div>
+<!-- ─── RESULTADOS ─── -->
+<section id="resultado">
+  <div class="section-label">05 — El resultado final</div>
+  <h2>Qué tendrá <em>Vonixx</em> al terminar</h2>
+  <p class="section-intro">No solo un chatbot. Un sistema de negocio completo que trabaja mientras el equipo se enfoca en lo que realmente importa.</p>
+
+  <div class="outcomes-grid">
+    <div class="outcome-card">
+      <span class="outcome-icon">🤖</span>
+      <h3>Asistente que nunca descansa</h3>
+      <p>Atiende clientes a las 2am del domingo igual que un lunes al mediodía. Ningún mensaje queda sin respuesta.</p>
     </div>
-    <div class="sig-col">
-      <div>Aceptado por</div>
-      <div class="sig-name">Arlen Lopez Wilson</div>
-      <div>Fecha: ____ / ____ / 2026</div>
-      <div style="color:#C94A1C;">✍️ firma digital válida</div>
+    <div class="outcome-card">
+      <span class="outcome-icon">📆</span>
+      <h3>Agenda siempre organizada</h3>
+      <p>Las citas se reservan solas, el equipo llega al taller sabiendo exactamente qué autos entran ese día y a qué hora.</p>
+    </div>
+    <div class="outcome-card">
+      <span class="outcome-icon">💰</span>
+      <h3>Cobros antes del servicio</h3>
+      <p>El pago llega confirmado antes de que el auto entre. Fin de los "ya te mando el PIX" que nunca llegan.</p>
+    </div>
+    <div class="outcome-card">
+      <span class="outcome-icon">🔄</span>
+      <h3>Clientes que vuelven solos</h3>
+      <p>El seguimiento automático convierte un servicio único en una relación de largo plazo. La recurrencia crece sin esfuerzo.</p>
+    </div>
+    <div class="outcome-card">
+      <span class="outcome-icon">📊</span>
+      <h3>Visibilidad total del negocio</h3>
+      <p>El equipo ve en una pantalla todos los clientes, estados de pago, citas del día y conversaciones activas.</p>
+    </div>
+    <div class="outcome-card">
+      <span class="outcome-icon">📞</span>
+      <h3>Llamadas automáticas de confirmación</h3>
+      <p>Para clientes VIP o servicios de alto valor, el sistema llama por voz — sin que nadie del equipo marque un número.</p>
     </div>
   </div>
+</section>
 
-  <div class="footer">
-    🌅 EurekaE · cada proyecto tiene su atardecer · confidencial
+<div class="divider"></div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">VONIXX</div>
+  <div class="footer-note">
+    Propuesta preparada · 2025<br>
+    Asistente Inteligente · Detailing Automotriz
   </div>
+</footer>
 
-</div>
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, entry.target.dataset.delay || 0);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  // Stagger problem cards
+  document.querySelectorAll('.problem-card').forEach((el, i) => {
+    el.dataset.delay = i * 100;
+    observer.observe(el);
+  });
+
+  // Stagger feature rows
+  document.querySelectorAll('.feature-row').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+    observer.observe(el);
+  });
+
+  // Stagger stages
+  document.querySelectorAll('.stage').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+    observer.observe(el);
+  });
+
+  // Stagger investment cards
+  document.querySelectorAll('.inv-card').forEach((el, i) => {
+    el.dataset.delay = i * 120;
+    observer.observe(el);
+  });
+
+  // Stagger outcome cards
+  document.querySelectorAll('.outcome-card').forEach((el, i) => {
+    el.dataset.delay = i * 80;
+    observer.observe(el);
+  });
+
+  // Animate chat demo on scroll
+  const chatSection = document.querySelector('#solucion');
+  const msgs = document.querySelectorAll('#chatDemo .msg');
+  msgs.forEach(m => { m.style.opacity = '0'; m.style.transform = 'translateY(8px)'; });
+
+  const chatObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      msgs.forEach((m, i) => {
+        setTimeout(() => {
+          m.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          m.style.opacity = '1';
+          m.style.transform = 'translateY(0)';
+        }, 400 + i * 500);
+      });
+      chatObserver.unobserve(chatSection);
+    }
+  }, { threshold: 0.3 });
+
+  chatObserver.observe(chatSection);
+</script>
 </body>
 </html>
